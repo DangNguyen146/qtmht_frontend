@@ -13,7 +13,7 @@ export default class Edit extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      name: "",
+      textTodo: "",
       status: "",
       textTask: "",
     };
