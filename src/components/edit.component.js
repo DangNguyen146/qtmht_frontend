@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { urlApi } from "./urlApi";
+import "../css/create.css";
+import Loading from "./loading";
 
 export default class Edit extends Component {
   constructor(props) {
@@ -11,22 +14,19 @@ export default class Edit extends Component {
 
     this.state = {
       name: "",
-      company: "",
-      age: "",
+      status: "",
+      textTask: "",
     };
   }
 
   componentDidMount() {
     axios
-      .get(
-        "https://stark-sierra-16548.herokuapp.com/persons/edit/" +
-          this.props.match.params.id
-      )
+      .get(urlApi + "persons/edit/" + this.props.match.params.id)
       .then((response) => {
         this.setState({
-          name: response.data.name,
-          company: response.data.company,
-          age: response.data.age,
+          textTodo: response.data.textTodo,
+          status: response.data.status,
+          textTask: response.data.textTask,
         });
       })
       .catch(function (error) {
@@ -36,32 +36,29 @@ export default class Edit extends Component {
 
   onChangeName(e) {
     this.setState({
-      name: e.target.value,
+      textTodo: e.target.value,
     });
   }
   onChangeCompany(e) {
     this.setState({
-      company: e.target.value,
+      status: e.target.value,
     });
   }
   onChangeAge(e) {
     this.setState({
-      age: e.target.value,
+      textTask: e.target.value,
     });
   }
 
   onSubmit(e) {
     e.preventDefault();
     const obj = {
-      name: this.state.name,
-      company: this.state.company,
-      age: this.state.age,
+      textTodo: this.state.textTodo,
+      status: this.state.status,
+      textTask: this.state.textTask,
     };
     axios
-      .post(
-        "http://localhost:4000/persons/update/" + this.props.match.params.id,
-        obj
-      )
+      .post(urlApi + "persons/update/" + this.props.match.params.id, obj)
       .then((res) => console.log(res.data));
 
     this.props.history.push("/index");
@@ -69,42 +66,39 @@ export default class Edit extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: 10 }}>
-        <h3 align="center">Update Person Info</h3>
+      <div className="card" style={{ marginTop: 10 }}>
+        <h3 align="center">Update Todo task</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Person Name: </label>
+            <label>Name Todo: </label>
             <input
               type="text"
               className="form-control"
-              value={this.state.name}
+              value={this.state.textTodo}
               onChange={this.onChangeName}
             />
           </div>
           <div className="form-group">
-            <label>Company Name: </label>
+            <label>Status: </label>
             <input
               type="text"
               className="form-control"
-              value={this.state.company}
+              defaultValue="todo"
+              value={this.state.status}
               onChange={this.onChangeCompany}
             />
           </div>
-          <div className="form-group">
-            <label>Age: </label>
+          <div className="form-group mb-3">
+            <label>Note: </label>
             <input
               type="text"
               className="form-control"
-              value={this.state.age}
+              value={this.state.textTask}
               onChange={this.onChangeAge}
             />
           </div>
           <div className="form-group">
-            <input
-              type="submit"
-              value="Update Person Info"
-              className="btn btn-primary"
-            />
+            <input type="submit" value="Add new" className="btn btn-warning" />
           </div>
         </form>
       </div>

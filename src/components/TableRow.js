@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { urlApi } from "./urlApi";
 
 class TableRow extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class TableRow extends Component {
   }
   delete() {
     axios
-      .get("http://localhost:4000/persons/delete/" + this.props.obj._id)
+      .get(urlApi + "persons/delete/" + this.props.obj._id)
       .then(console.log("Deleted"))
       .catch((err) => console.log(err));
 
@@ -19,9 +20,9 @@ class TableRow extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.obj.name}</td>
-        <td>{this.props.obj.company}</td>
-        <td>{this.props.obj.age}</td>
+        <td>{this.props.obj.textTodo}</td>
+        <td>{this.props.obj.status}</td>
+        <td>{this.props.obj.textTask}</td>
         <td>
           <Link to={"/edit/" + this.props.obj._id} className="btn btn-primary">
             Edit

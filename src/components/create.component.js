@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { urlApi } from "./urlApi";
+import "../css/create.css";
 
 export default class Create extends Component {
   constructor(props) {
@@ -10,27 +12,27 @@ export default class Create extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      name: "",
-      company: "",
-      age: "",
+      textTodo: "",
+      status: "todo",
+      textTask: "",
     };
   }
 
   onChangeName(e) {
     this.setState({
-      name: e.target.value,
+      textTodo: e.target.value,
     });
   }
 
   onChangeCompany(e) {
     this.setState({
-      company: e.target.value,
+      status: e.target.value,
     });
   }
 
   onChangeAge(e) {
     this.setState({
-      age: e.target.value,
+      textTask: e.target.value,
     });
   }
 
@@ -38,62 +40,70 @@ export default class Create extends Component {
     e.preventDefault();
 
     const obj = {
-      name: this.state.name,
-      company: this.state.company,
-      age: this.state.age,
+      textTodo: this.state.textTodo,
+      status: this.state.status,
+      textTask: this.state.textTask,
     };
     axios
-      .post("https://stark-sierra-16548.herokuapp.com/persons/add", obj)
+      .post(urlApi + "persons/add", obj)
       .then((res) => console.log(res.data));
 
     this.setState({
       name: "",
-      company: "",
-      age: "",
+      status: "",
+      textTask: "",
     });
   }
 
   render() {
     return (
-      <div style={{ marginTop: 10 }}>
-        <h3>Add New Person</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Person Name: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChangeName}
-            />
-          </div>
-          <div className="form-group">
-            <label>Company Name: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.company}
-              onChange={this.onChangeCompany}
-            />
-          </div>
-          <div className="form-group">
-            <label>Age: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.age}
-              onChange={this.onChangeAge}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Register Person"
-              className="btn btn-primary"
-            />
-          </div>
-        </form>
-      </div>
+      <>
+        <div className="card" style={{ marginTop: 10 }}>
+          <h3>Add New Person</h3>
+          <details className="warning">
+            <summary>Create new ToDo</summary>
+            <p>Some text to be hidden.</p>
+          </details>
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label>Name Todo: </label>
+              <input
+                type="text"
+                className="form-control"
+                value={this.state.textTodo}
+                onChange={this.onChangeName}
+              />
+            </div>
+            <div className="form-group">
+              <label>Status: </label>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue="todo"
+                value={this.state.status}
+                onChange={this.onChangeCompany}
+                disabled
+              />
+            </div>
+            <div className="form-group mb-3">
+              <label>Note: </label>
+              <input
+                type="text"
+                className="form-control"
+                value={this.state.textTask}
+                onChange={this.onChangeAge}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="submit"
+                value="Add new"
+                className="btn btn-warning"
+              />
+            </div>
+          </form>
+        </div>
+      </>
     );
   }
 }
