@@ -59,7 +59,7 @@ export default class Create extends Component {
     return (
       <>
         <div className="card" style={{ marginTop: 10 }}>
-          <h3>Add New Person</h3>
+          <h3>Add New Todo</h3>
           <details className="warning">
             <summary>Create new ToDo</summary>
             <p>Some text to be hidden.</p>

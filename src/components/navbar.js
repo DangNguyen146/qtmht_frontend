@@ -45,7 +45,7 @@ export default class NavbarHome extends Component {
                   <hr />
                   <li className="nav-item">
                     <Link to={"/index"} className="nav-link">
-                      Index
+                      List todo
                     </Link>
                   </li>
                 </ul>
@@ -75,7 +75,7 @@ export default class NavbarHome extends Component {
               </li>
               <li className="nav-item">
                 <Link to={"/index"} className="nav-link">
-                  Index
+                  List todo
                 </Link>
               </li>
             </ul>
