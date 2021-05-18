@@ -6,7 +6,7 @@ export default class HomePage extends Component {
     return (
       <>
         <h2 className="text-success text-center">
-          TODOS app with ReactJs, NodeJs, MongoDB
+          TODO app with ReactJs, NodeJs, MongoDB
         </h2>
         <h2 className="text-secondary text-center">
           Nguyen Khai Dang - 19521317
