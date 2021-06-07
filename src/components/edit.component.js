@@ -21,7 +21,7 @@ export default class Edit extends Component {
 
   componentDidMount() {
     axios
-      .get(urlApi + "persons/edit/" + this.props.match.params.id)
+      .get(urlApi + "todos/edit/" + this.props.match.params.id)
       .then((response) => {
         this.setState({
           textTodo: response.data.textTodo,
@@ -58,7 +58,7 @@ export default class Edit extends Component {
       textTask: this.state.textTask,
     };
     axios
-      .post(urlApi + "persons/update/" + this.props.match.params.id, obj)
+      .post(urlApi + "todos/update/" + this.props.match.params.id, obj)
       .then((res) => console.log(res.data));
 
     this.props.history.push("/index");

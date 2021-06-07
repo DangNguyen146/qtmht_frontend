@@ -44,9 +44,7 @@ export default class Create extends Component {
       status: this.state.status,
       textTask: this.state.textTask,
     };
-    axios
-      .post(urlApi + "persons/add", obj)
-      .then((res) => console.log(res.data));
+    axios.post(urlApi + "todos/add", obj).then((res) => console.log(res.data));
 
     this.setState({
       name: "",

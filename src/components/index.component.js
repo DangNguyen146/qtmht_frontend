@@ -8,23 +8,23 @@ import Loading from "./loading";
 export default class Index extends Component {
   constructor(props) {
     super(props);
-    this.state = { persons: [], isLoading: "true" };
+    this.state = { todos: [], isLoading: "true" };
   }
 
   loadData = () => {};
 
   tabRow() {
     axios
-      .get(urlApi + "persons")
+      .get(urlApi + "todos")
       .then((response) => {
         console.log(response.data);
-        this.setState({ persons: response.data, isLoading: "false" });
+        this.setState({ todos: response.data, isLoading: "false" });
       })
       .catch(function (error) {
         console.log(error);
       });
 
-    return this.state.persons.map(function (object, i) {
+    return this.state.todos.map(function (object, i) {
       return <TableRow obj={object} key={i} />;
     });
   }
